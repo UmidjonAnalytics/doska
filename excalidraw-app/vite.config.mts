@@ -272,7 +272,9 @@ export default defineConfig(({ mode }) => {
     },
     plugins: [
       Sitemap({
-        hostname: "https://excalidraw.com",
+        hostname:
+          process.env.DOSKA_SITE_URL ||
+          "https://umidjonanalytics.github.io/doska",
         outDir: "build",
         changefreq: "monthly",
         // its static in public folder
@@ -426,21 +428,22 @@ export default defineConfig(({ mode }) => {
               type: "image/png",
             },
           ],
-          start_url: "/",
+          start_url: "./",
+          scope: "./",
           id: "doska",
           display: "standalone",
           theme_color: "#121212",
           background_color: "#ffffff",
           file_handlers: [
             {
-              action: "/",
+              action: "./",
               accept: {
                 "application/vnd.excalidraw+json": [".excalidraw"],
               },
             },
           ],
           share_target: {
-            action: "/web-share-target",
+            action: "./web-share-target",
             method: "POST",
             enctype: "multipart/form-data",
             params: {

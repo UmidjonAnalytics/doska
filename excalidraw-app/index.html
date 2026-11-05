@@ -27,7 +27,7 @@
       property="og:description"
       content="Doska — oʻzbek tilidagi onlayn doska. Diagramma, sxema va gʻoyalarni qoʻlda chizilgandek chizing."
     />
-    <meta property="og:image" content="/og-image.png" />
+    <meta property="og:image" content="%BASE_URL%og-image.png" />
     <meta property="twitter:card" content="summary_large_image" />
 
     <!------------------------------------------------------------------------->
@@ -89,9 +89,23 @@
     </script>
     <% } %>
 
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="%BASE_URL%apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="%BASE_URL%favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="%BASE_URL%favicon-16x16.png"
+    />
 
     <!-- App version -->
     <meta name="version" content="{version}" />

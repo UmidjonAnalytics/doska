@@ -21,6 +21,10 @@ The Pro gate is **UI only** for now. `isProUser()` in `excalidraw-app/doska/boar
 
 `.env.production` still uses Excalidraw's hosted services for live collaboration (`VITE_APP_WS_SERVER_URL`, Firebase), shareable links (`json.excalidraw.com`), the public library and the AI backend. Before a public launch, run your own instances ([excalidraw-room](https://github.com/excalidraw/excalidraw-room), your own Firebase project) or turn those features off.
 
+## Hosting
+
+Every push to `main` builds the app and deploys it to GitHub Pages (`.github/workflows/deploy-pages.yml`), at https://umidjonanalytics.github.io/doska/. GitHub Pages' terms don't allow sites that mainly sell software as a service, so move to a host that allows commercial use (for example Cloudflare Pages) before taking Pro payments. For a custom domain, build with `--base /` instead of `--base /doska/`.
+
 ## Development
 
 ```bash
