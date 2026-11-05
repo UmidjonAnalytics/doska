@@ -6,6 +6,7 @@ Doska is a hand-drawn style online whiteboard for Uzbek speakers. It is a fork o
 
 - **Uzbek by default.** Full Uzbek translation, both Latin (`uz-UZ`, default) and Cyrillic (`uz-Cyrl-UZ`). The browser language is ignored. Users change the language from the menu, or with `?lng=en` in the URL.
 - **Uzbek glyphs in the hand-drawn font.** Excalifont has no `ʻ` (in oʻ/gʻ) or `Ғ ғ Қ қ Ҳ ҳ`, so they used to fall back to another font. An add-on subset built from Excalifont's own strokes fills the gap: `packages/excalidraw/fonts/Excalifont/Excalifont-Regular-c8979…woff2`.
+- **Arabic letters in the hand-drawn font.** Arabic text typed on the board uses [Playpen Sans Arabic](https://github.com/TypeTogether/Playpen-Sans) (SIL OFL 1.1), a handwriting font cut down to Arabic letters at a weight that matches Excalifont. It's embedded in SVG exports too.
 - **Doska branding.** Name, logo, icons, page meta and PWA manifest are Doska's. Excalidraw+ promos, sign-up links and social links are removed.
 - **Boards + Doska Pro.** The free plan has 1 board. "Yangi doska" (New board) opens the Pro dialog. Pro users can create unlimited boards and switch between them in the main menu.
 
