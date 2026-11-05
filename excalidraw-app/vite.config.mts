@@ -394,14 +394,20 @@ export default defineConfig(({ mode }) => {
           maximumFileSizeToCacheInBytes: 2.3 * 1024 ** 2, // 2.3MB
         },
         manifest: {
-          short_name: "Excalidraw",
-          name: "Excalidraw",
+          short_name: "Doska",
+          name: "Doska — onlayn doska",
           description:
-            "Excalidraw is a whiteboard tool that lets you easily sketch diagrams that have a hand-drawn feel to them.",
+            "Oʻzbek tilidagi onlayn doska: diagramma, sxema va gʻoyalarni qoʻlda chizilgandek chizing.",
+          lang: "uz",
           icons: [
             {
               src: "android-chrome-192x192.png",
               sizes: "192x192",
+              type: "image/png",
+            },
+            {
+              src: "android-chrome-512x512.png",
+              sizes: "512x512",
               type: "image/png",
             },
             {
@@ -421,7 +427,7 @@ export default defineConfig(({ mode }) => {
             },
           ],
           start_url: "/",
-          id: "excalidraw",
+          id: "doska",
           display: "standalone",
           theme_color: "#121212",
           background_color: "#ffffff",
@@ -450,38 +456,6 @@ export default defineConfig(({ mode }) => {
               ],
             },
           },
-          screenshots: [
-            {
-              src: "/screenshots/virtual-whiteboard.png",
-              type: "image/png",
-              sizes: "462x945",
-            },
-            {
-              src: "/screenshots/wireframe.png",
-              type: "image/png",
-              sizes: "462x945",
-            },
-            {
-              src: "/screenshots/illustration.png",
-              type: "image/png",
-              sizes: "462x945",
-            },
-            {
-              src: "/screenshots/shapes.png",
-              type: "image/png",
-              sizes: "462x945",
-            },
-            {
-              src: "/screenshots/collaboration.png",
-              type: "image/png",
-              sizes: "462x945",
-            },
-            {
-              src: "/screenshots/export.png",
-              type: "image/png",
-              sizes: "462x945",
-            },
-          ],
         },
       }),
       createHtmlPlugin({

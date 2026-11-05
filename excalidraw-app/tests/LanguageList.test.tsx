@@ -40,16 +40,17 @@ describe("Test LanguageList", () => {
 
     // select rectangle tool to show properties menu
     UI.clickTool("rectangle");
-    // english lang should display `thin` label
-    expect(screen.queryByTitle(/thin/i)).not.toBeNull();
+    // Doska starts in Uzbek: `thin` is `Ingichka`
+    await waitFor(() => expect(screen.queryByTitle(/Ingichka/)).not.toBeNull());
+    expect(screen.queryByTitle(/thin/i)).toBeNull();
     fireEvent.click(document.querySelector(".dropdown-menu-button")!);
 
     fireEvent.change(document.querySelector(".dropdown-select__language")!, {
       target: { value: TEST_LANG_CODE },
     });
-    // switching to French, `thin` label should no longer exist
-    await waitFor(() => expect(screen.queryByTitle(/thin/i)).toBeNull());
-    // reset language
+    // switching to French, the Uzbek label should no longer exist
+    await waitFor(() => expect(screen.queryByTitle(/Ingichka/)).toBeNull());
+    // switch to English
     fireEvent.change(document.querySelector(".dropdown-select__language")!, {
       target: { value: defaultLang.code },
     });

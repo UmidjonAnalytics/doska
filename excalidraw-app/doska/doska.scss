@@ -1,0 +1,100 @@
+.excalidraw {
+  .doska-pro-badge {
+    display: inline-block;
+    padding: 1px 6px;
+    border-radius: 6px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: #fff;
+    background: #e8833a;
+    vertical-align: middle;
+  }
+
+  .doska-pro-dialog {
+    &__notice {
+      margin: 0 0 1rem;
+      padding: 0.75rem 1rem;
+      border-radius: var(--border-radius-lg);
+      background: var(--color-primary-light);
+      color: var(--color-on-primary-container, var(--text-primary-color));
+    }
+
+    &__plans {
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      gap: 0.75rem;
+
+      @media (max-width: 520px) {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    &__actions {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-top: 1.25rem;
+    }
+
+    &__soon {
+      margin: 0;
+      text-align: center;
+      font-weight: 600;
+      color: var(--color-gray-60);
+    }
+  }
+
+  .doska-plan {
+    padding: 1rem;
+    border: 1px solid var(--default-border-color);
+    border-radius: var(--border-radius-lg);
+
+    &--pro {
+      border: 2px solid #e8833a;
+    }
+
+    &__name {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+    }
+
+    &__price {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    &__desc {
+      color: var(--color-gray-60);
+      font-size: 0.875rem;
+    }
+
+    &__features {
+      list-style: none;
+      padding: 0;
+      margin: 0.5rem 0 0;
+
+      li {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        margin: 0.35rem 0;
+      }
+    }
+
+    &__check svg {
+      width: 1rem;
+      height: 1rem;
+      color: #2f9e44;
+    }
+
+    &__current {
+      margin-top: 0.75rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--color-primary);
+    }
+  }
+}
