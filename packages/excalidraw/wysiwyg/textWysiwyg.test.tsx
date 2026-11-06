@@ -267,6 +267,51 @@ describe("textWysiwyg", () => {
       expect(text.y + lineHeightPx / 2).toBe(80);
     });
 
+    it("should right-align new text that starts with an Arabic letter and grow it leftward", async () => {
+      UI.clickTool("text");
+      mouse.clickAt(300, 80);
+      const editor = await getTextEditor();
+
+      updateTextEditor(editor, "س");
+      const first = h.elements[0] as ExcalidrawTextElement;
+      expect(first.textAlign).toBe("right");
+      const rightEdge = first.x + first.width;
+      // the text ends where it was placed, as a left-to-right text starts there
+      expect(rightEdge).toBeCloseTo(300);
+
+      updateTextEditor(editor, "سلام دنیا");
+      const grown = h.elements[0] as ExcalidrawTextElement;
+      expect(grown.textAlign).toBe("right");
+      expect(grown.width).toBeGreaterThan(first.width);
+      expect(grown.x + grown.width).toBeCloseTo(rightEdge);
+    });
+
+    it("should keep new text that starts with a Latin letter left-aligned", async () => {
+      UI.clickTool("text");
+      mouse.clickAt(300, 80);
+      const editor = await getTextEditor();
+
+      updateTextEditor(editor, "Doska سلام");
+      expect((h.elements[0] as ExcalidrawTextElement).textAlign).toBe("left");
+    });
+
+    it("should keep the alignment a user picked for Arabic text", async () => {
+      const text = API.createElement({
+        type: "text",
+        text: "سلام",
+        textAlign: "left",
+        x: 60,
+        y: 0,
+      });
+      API.setElements([text]);
+      UI.clickTool("text");
+      mouse.clickAt(text.x + text.width / 2, text.y + text.height / 2);
+      const editor = await getTextEditor();
+
+      updateTextEditor(editor, "سلام دنیا");
+      expect((h.elements[0] as ExcalidrawTextElement).textAlign).toBe("left");
+    });
+
     it("should snap newly created text top-left to the current grid cell when clicked with text tool in grid mode", async () => {
       API.setAppState({
         currentItemFontFamily: FONT_FAMILY.Cascadia,

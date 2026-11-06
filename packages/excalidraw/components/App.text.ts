@@ -8,6 +8,8 @@ import {
   VERTICAL_ALIGN,
   getFontString,
   getLineHeight,
+  hasStrongDirection,
+  isRTL,
   sceneCoordsToViewportCoords,
   type Bounds,
   type StylesPanelMode,
@@ -220,13 +222,31 @@ export class AppText {
             return newElementWith(_element, stickyLayout.container);
           }
           if (_element.id === latestTextElement.id && isTextElement(_element)) {
+            // a free text whose first letter is right-to-left (Arabic, ...)
+            // becomes right-aligned and grows leftward, its right edge at
+            // the point where it was placed (where a left-to-right text
+            // starts). Only at the first letter: an alignment picked later
+            // by the user is kept.
+            const textElement =
+              !container &&
+              _element.textAlign === "left" &&
+              !hasStrongDirection(_element.originalText) &&
+              isRTL(nextOriginalText)
+                ? {
+                    ..._element,
+                    textAlign: "right" as const,
+                    x: _element.x - _element.width,
+                  }
+                : _element;
             return newElementWith(_element, {
               originalText: nextOriginalText,
+              textAlign: textElement.textAlign,
+              x: textElement.x,
               isDeleted: isDeleted ?? _element.isDeleted,
               ...(stickyLayout?.text ??
                 // returns (wrapped) text and new dimensions
                 refreshTextDimensions(
-                  _element,
+                  textElement,
                   getContainerElement(_element, elementsMap),
                   elementsMap,
                   nextOriginalText,

@@ -394,6 +394,14 @@ const RE_RTL_CHECK = new RegExp(`^[^${RS_LTR_CHARS}]*[${RS_RTL_CHARS}]`);
  */
 export const isRTL = (text: string) => RE_RTL_CHECK.test(text);
 
+const RE_STRONG_DIRECTION = new RegExp(`[${RS_LTR_CHARS}${RS_RTL_CHARS}]`);
+/**
+ * Whether the text has any letter with a direction of its own, i.e. it is not
+ * empty and not just digits, spaces or punctuation.
+ */
+export const hasStrongDirection = (text: string) =>
+  RE_STRONG_DIRECTION.test(text);
+
 const RE_RTL_CHARS = new RegExp(`[${RS_RTL_CHARS}]`);
 /**
  * Checks whether the text has any RTL character, i.e. whether it may be laid

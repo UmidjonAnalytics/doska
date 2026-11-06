@@ -5,6 +5,7 @@ import {
   DEFAULT_VERTICAL_ALIGN,
   getFontString,
   getLineHeight,
+  isRTL,
   isWritableElement,
   normalizeEOL,
   normalizeLink,
@@ -506,6 +507,8 @@ export class AppClipboard {
 
           const element = newTextElement({
             ...textElementProps,
+            // right-to-left text (Arabic, ...) is right-aligned
+            ...(isRTL(originalText) ? { textAlign: "right" as const } : {}),
             x: startX,
             y: startY,
             text,
