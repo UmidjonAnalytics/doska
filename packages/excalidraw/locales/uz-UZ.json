@@ -727,7 +727,7 @@
       "mermaidParseError": "Mermaid sintaksis xatosi"
     },
     "rateLimit": {
-      "messageLimit": "Bepul tarifdagi AI limitingiz tugadi. Koʻproq uchun Doska Proʼni sinab koʻring yoki ertaga qayting.",
+      "messageLimit": "Bugungi AI limitingiz tugadi. Ertaga qayta urinib koʻring.",
       "generalRateLimit": "Shoshilmang, juda tezsiz! Qayta urinishdan oldin biroz kuting.",
       "messageLimitInputPlaceholder": "Xabarlar limitiga yetdingiz"
     },

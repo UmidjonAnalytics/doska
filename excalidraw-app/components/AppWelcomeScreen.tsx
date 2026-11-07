@@ -2,20 +2,13 @@ import { useI18n } from "@excalidraw/excalidraw/i18n";
 import { WelcomeScreen } from "@excalidraw/excalidraw/index";
 import React from "react";
 
-import { useAtomValue, useSetAtom } from "../app-jotai";
-import { proStatusAtom } from "../doska/boards";
-import { DoskaLogo, DoskaMark } from "../doska/DoskaLogo";
-import { proDialogAtom } from "../doska/ProDialog";
-import { useDoskaT } from "../doska/strings";
+import { DoskaLogo } from "../doska/DoskaLogo";
 
 export const AppWelcomeScreen: React.FC<{
   onCollabDialogOpen: () => any;
   isCollabEnabled: boolean;
 }> = React.memo((props) => {
   const { t } = useI18n();
-  const { dt } = useDoskaT();
-  const isPro = useAtomValue(proStatusAtom);
-  const setProDialog = useSetAtom(proDialogAtom);
 
   return (
     <WelcomeScreen>
@@ -42,15 +35,6 @@ export const AppWelcomeScreen: React.FC<{
             <WelcomeScreen.Center.MenuItemLiveCollaborationTrigger
               onSelect={() => props.onCollabDialogOpen()}
             />
-          )}
-          {!isPro && (
-            <WelcomeScreen.Center.MenuItem
-              onSelect={() => setProDialog({ isOpen: true, reason: "menu" })}
-              shortcut={null}
-              icon={<DoskaMark size={16} />}
-            >
-              {dt("pro")}
-            </WelcomeScreen.Center.MenuItem>
           )}
         </WelcomeScreen.Center.Menu>
       </WelcomeScreen.Center>

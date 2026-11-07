@@ -131,9 +131,6 @@ import { AIComponents } from "./components/AI";
 
 import "./index.scss";
 
-import { DoskaProBanner } from "./components/DoskaProBanner";
-import { ProDialog } from "./doska/ProDialog";
-
 import type { CollabAPI } from "./collab/Collab";
 
 polyfill();
@@ -923,30 +920,20 @@ const ExcalidrawWrapper = () => {
         theme={editorTheme}
         onThemeChange={setAppTheme}
         renderTopRightUI={(isMobile) => {
-          if (isMobile) {
+          if (isMobile || !collabAPI || !isCollabAvailable) {
             return null;
           }
 
           return (
             <div className="excalidraw-ui-top-right">
-              {excalidrawAPI?.getEditorInterface().formFactor === "desktop" && (
-                <DoskaProBanner />
-              )}
-
-              {collabAPI && isCollabAvailable && (
-                <>
-                  {collabError.message && (
-                    <CollabError collabError={collabError} />
-                  )}
-                  <LiveCollaborationTrigger
-                    isCollaborating={isCollaborating}
-                    onSelect={() =>
-                      setShareDialogState({ isOpen: true, type: "share" })
-                    }
-                    editorInterface={editorInterface}
-                  />
-                </>
-              )}
+              {collabError.message && <CollabError collabError={collabError} />}
+              <LiveCollaborationTrigger
+                isCollaborating={isCollaborating}
+                onSelect={() =>
+                  setShareDialogState({ isOpen: true, type: "share" })
+                }
+                editorInterface={editorInterface}
+              />
             </div>
           );
         }}
@@ -1017,8 +1004,6 @@ const ExcalidrawWrapper = () => {
             }
           }}
         />
-
-        <ProDialog />
 
         {errorMessage && (
           <ErrorDialog onClose={() => setErrorMessage("")}>

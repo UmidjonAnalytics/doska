@@ -36,9 +36,6 @@ interface ImportMetaEnv {
 
   VITE_APP_PLUS_APP: string;
 
-  // Doska Pro checkout page (Payme / Click / Uzum / Telegram bot)
-  VITE_APP_DOSKA_PRO_CHECKOUT_URL: string;
-
   VITE_APP_GIT_SHA: string;
 
   MODE: string;

@@ -1,10 +1,7 @@
 import { randomId } from "@excalidraw/common";
 
-import { atom } from "../app-jotai";
 import { STORAGE_KEYS } from "../app_constants";
 import { LocalData } from "../data/LocalData";
-
-import { FREE_BOARD_LIMIT } from "./config";
 
 // Multiple boards on top of Excalidraw's single local scene.
 //
@@ -27,7 +24,6 @@ type BoardSnapshot = {
 const KEYS = {
   boards: "doska-boards",
   active: "doska-active-board",
-  pro: "doska-pro",
   snapshot: (id: string) => `doska-board:${id}`,
 };
 
@@ -43,25 +39,6 @@ const read = <T>(key: string, fallback: T): T => {
 const write = (key: string, value: unknown) => {
   localStorage.setItem(key, JSON.stringify(value));
 };
-
-// --- Pro plan -----------------------------------------------------------------
-
-export type ProLicense = { plan: "pro"; expiresAt: number };
-
-/**
- * PLACEHOLDER: whether this browser has an active Pro plan.
- *
- * This only reads a flag from localStorage, which a user can edit, so it is a
- * UI gate, not real enforcement. When you add accounts + payments, replace
- * this with a check against your server (e.g. a signed token from your
- * Payme/Click webhook) and enforce the board limit there.
- */
-export const isProUser = (): boolean => {
-  const license = read<ProLicense | null>(KEYS.pro, null);
-  return !!license && license.plan === "pro" && license.expiresAt > Date.now();
-};
-
-export const proStatusAtom = atom(isProUser());
 
 // --- boards -------------------------------------------------------------------
 
@@ -80,9 +57,6 @@ export const getActiveBoardId = (boards: Board[]): string => {
   const id = read<string | null>(KEYS.active, null);
   return boards.some((board) => board.id === id) ? id! : boards[0].id;
 };
-
-export const canCreateBoard = (boards: Board[]) =>
-  isProUser() || boards.length < FREE_BOARD_LIMIT;
 
 const parkActiveBoard = (activeId: string) => {
   // write any pending edits into the regular keys, then stop the app from
@@ -117,16 +91,12 @@ export const switchBoard = (boards: Board[], targetId: string) => {
   activate(targetId, read<BoardSnapshot | null>(KEYS.snapshot(targetId), null));
 };
 
-/** Returns false (and changes nothing) when the free limit is reached. */
-export const createBoard = (boards: Board[], name: string): boolean => {
-  if (!canCreateBoard(boards)) {
-    return false;
-  }
+/** Creates a new empty board and opens it. */
+export const createBoard = (boards: Board[], name: string) => {
   const board: Board = { id: randomId(), name, createdAt: Date.now() };
   parkActiveBoard(getActiveBoardId(boards));
   write(KEYS.boards, [...boards, board]);
   activate(board.id, null);
-  return true;
 };
 
 /** Deletes the active board and opens the next one. */
